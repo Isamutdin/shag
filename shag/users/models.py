@@ -8,12 +8,12 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     # 'third_name', 'first_name', 'second_name', 'status'
     username = None
-    first_name = models.CharField(_('Имя'), max_length=30, null=True,)
-    second_name = models.CharField(_('Фамилия'), max_length=30, null=True,)
-    third_name = models.CharField(_('Отчество'), max_length=30, null=True,)
+    first_name = models.CharField(_('Имя'), max_length=30, null=True, blank=True)
+    second_name = models.CharField(_('Фамилия'), max_length=30, null=True, blank=True)
+    third_name = models.CharField(_('Отчество'), max_length=30, null=True, blank=True)
 
     email = models.EmailField(_('Адрес электронной почты'), unique=True)
-    school = models.CharField(_('Школа'), max_length=30, null=True,)
+    school = models.CharField(_('Школа'), max_length=30, null=True, blank=True)
     STATUS_CHOICES = [
     ('TC', 'Учитель'),
     ('ST', 'Ученик'),

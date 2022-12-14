@@ -1,0 +1,32 @@
+{% extends '../_base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <form method="POST">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            
+                <div class="form-floating">
+                    <input type="text" name="email" required="" id="id_username" maxlength="150" class="form-control"
+                        placeholder="Username" aria-label="default input example">
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" name="password" required="" class="form-control" id="id_password" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+            
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
