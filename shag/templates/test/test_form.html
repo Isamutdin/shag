@@ -1,0 +1,22 @@
+{% extends '../common/_base.html' %}
+{% block content %}
+
+<div class="p-5 row justify-content-lg-center">
+    <div class="col col-md-7">
+
+        <div class="h-100 p-5 bg-light border rounded-3">
+
+            <form method="Post">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <input class="btn btn-primary" type="submit"/>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends '../common/_base.html' %}
+{% block content %}
+
+
+<div class="p-5 row justify-content-lg-center">
+    <div class="col col-md-7">
+
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h1>Тест</h1>
+            <h4>Название теста: {{ test.title }}</h4>
+            <br>
+            <h5>Содержимое:</h5>
+            <div class="border">
+                {{ test.note|safe }}
+            </div>
+            <br>
+            <h5>Автор: {{ test.author }}</h5>
+            <br>
+            <a class="btn btn-primary">Изменить</a>
+            <p></p>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                {% for question in questions %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ question }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapse{{ question }}" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapse{{ question }}">
+                            {{ question }}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse{{ question }}" class="accordion-collapse collapse"
+                        aria-labelledby="panelsStayOpen-heading{{ question }}">
+                        <div class="accordion-body">
+                            <p>{{ question.note|safe }}</p>
+                            <p>{{ question.score }}</p>
+                            <p>{{ question.answer_type }}</p>
+                            <br>
+                            <a class="btn btn-primary">Изменить</a>
+                            <a class="btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+        <br>
+    </div>
+
+</div>
+
+<div class="p-5 row justify-content-lg-center">
+    <div class="col col-md-7">
+
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h1>Вопрос</h1>
+            <form method="Post">
+                {% csrf_token %}
+
+                Содержимое запроса
+                {{ form.media }}
+                <br>
+                {{ form.note }}
+                <br>
+                Кол-во баллов
+                {{ form.score }}
+                <br>
+                Тип вопроса
+                {{ form.answer_type }}
+                <br>
+                <input class="btn btn-primary" type="submit" />
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

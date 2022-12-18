@@ -17,7 +17,6 @@ pip-delete-this-directory.txt
 
 # Django stuff:
 *.log
-settings.py
 db.sqlite3
 
 # Environments
@@ -27,3 +26,4 @@ venv/
 # media dirs
 media/
 photos/
+static/
