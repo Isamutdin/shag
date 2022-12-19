@@ -21,15 +21,15 @@
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 {% for question in questions %}
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ question }}">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ question.pk }}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapse{{ question }}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-collapse{{ question }}">
-                            {{ question }}
+                            data-bs-target="#panelsStayOpen-collapse{{ question.pk }}" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapse{{ question.pk }}">
+                            {{ question.pk }}
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapse{{ question }}" class="accordion-collapse collapse"
-                        aria-labelledby="panelsStayOpen-heading{{ question }}">
+                    <div id="panelsStayOpen-collapse{{ question.pk }}" class="accordion-collapse collapse"
+                        aria-labelledby="panelsStayOpen-heading{{ question.pk }}">
                         <div class="accordion-body">
                             <p>{{ question.note|safe }}</p>
                             <p>{{ question.score }}</p>
@@ -55,7 +55,7 @@
 
         <div class="h-100 p-5 bg-light border rounded-3">
             <h1>Вопрос</h1>
-            <form method="Post">
+            <form method="POST">
                 {% csrf_token %}
 
                 Содержимое запроса

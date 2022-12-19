@@ -12,7 +12,7 @@ class Question(models.Model):
     answer_type = models.ForeignKey('TypeAnswer', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return str(self.pk)
+        return str(self.note)
 
 
 class TypeAnswer(models.Model):

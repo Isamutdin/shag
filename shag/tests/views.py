@@ -12,14 +12,8 @@ class QuestionCreateView(CreateView):
     template_name = "question/question_form.html"
     form_class = QuestionForm
 
-    def get_success_url(self) -> str:
-        return reverse("question_create")
-
-    def get(self, request, *args: str, **kwargs):
-        self.pk = kwargs['pk']
-        return super().get(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
+        self.pk = self.kwargs['pk']
         data = super().get_context_data(**kwargs)
         data['test'] = Test.objects.get(pk=self.pk)
         m2m = TestQuestions_m2m.objects.filter(test_id=self.pk).values_list('question_id')
@@ -27,7 +21,19 @@ class QuestionCreateView(CreateView):
 
         for el in m2m:
             data['questions'].append(Question.objects.get(pk=el[0]))
+
         return data
+
+    def form_valid(self, form):
+        question = Question.objects.create(**form.cleaned_data)
+        test_question_m2m = TestQuestions_m2m.objects.create(test_id=self.kwargs['pk'], question_id=question.pk)
+        question.save()
+        test_question_m2m.save()
+        return redirect(self.get_success_url())
+        
+
+    def get_success_url(self) -> str:
+        return reverse("question_create", args=[self.kwargs['pk']])
 
 
 class TestCreateView(CreateView):
