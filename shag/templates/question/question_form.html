@@ -35,7 +35,7 @@
                             <p>{{ question.score }}</p>
                             <p>{{ question.answer_type }}</p>
                             <br>
-                            <a class="btn btn-primary">Изменить</a>
+                            <a href="{% url 'question_update' question.pk test.pk %}" class="btn btn-primary">Изменить</a>
                             <a class="btn btn-danger">Удалить</a>
                         </div>
                     </div>
