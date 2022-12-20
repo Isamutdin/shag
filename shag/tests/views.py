@@ -60,6 +60,19 @@ class QuestionUpdateView(UpdateView):
         return reverse("question_create", args=[self.kwargs['id']])
 
 
+class QuestionDeleteView(DeleteView):
+    model = Question
+    template_name = "question/question_confirm_delete.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['test_id'] = self.kwargs['id']
+        return data
+
+    def get_success_url(self) -> str:#pk вопроса, а id теста
+        return reverse("question_create", args=[self.kwargs['id']])
+
+
 class TestCreateView(CreateView):
     model = Test
     template_name = 'test/test_form.html'

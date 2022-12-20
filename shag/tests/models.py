@@ -45,5 +45,5 @@ class Test(models.Model):
 
 
 class TestQuestions_m2m(models.Model):
-    test = models.ForeignKey("Test", on_delete=models.PROTECT)
-    question = models.ForeignKey("Question", on_delete=models.PROTECT)
+    test = models.ForeignKey("Test", on_delete=models.CASCADE)
+    question = models.ForeignKey("Question", on_delete=models.CASCADE)

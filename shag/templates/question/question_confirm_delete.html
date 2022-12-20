@@ -1,0 +1,23 @@
+{% extends '../common/_base.html' %}
+
+{% block content %}
+
+
+<div class="p-5 row justify-content-lg-center">
+    <div class="col col-md-7">
+
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <form method="post">
+                {% csrf_token %}
+                Are you sure you want to delete Question: {{ object|safe }}?
+                {{ form }}
+                <p></p>
+                <a href="{% url 'question_create' test_id %}" class="btn btn-primary">Отменить</a>
+                <input class="btn btn-danger" type="submit" value="Подтвердить">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

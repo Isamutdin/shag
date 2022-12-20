@@ -30,13 +30,13 @@
                     </h2>
                     <div id="panelsStayOpen-collapse{{ question.pk }}" class="accordion-collapse collapse"
                         aria-labelledby="panelsStayOpen-heading{{ question.pk }}">
-                        <div class="accordion-body">
+                        <div class="accordion-body" style="word-wrap: break-word;">
                             <p>{{ question.note|safe }}</p>
                             <p>{{ question.score }}</p>
                             <p>{{ question.answer_type }}</p>
                             <br>
                             <a href="{% url 'question_update' question.pk test.pk %}" class="btn btn-primary">Изменить</a>
-                            <a class="btn btn-danger">Удалить</a>
+                            <a href="{% url 'question_delete' question.pk test.pk %}" class="btn btn-danger">Удалить</a>
                         </div>
                     </div>
                 </div>
