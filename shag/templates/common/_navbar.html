@@ -19,11 +19,21 @@
           </ul>
         </li>
       </ul>
-
       <div class="text-end">
-        <a href="#" class="btn me-2">Login</a>
-        <a href="#" class="btn btn-warning">Sign-up</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn me-2">Logout</a>
+          {% if user.is_staf %}
+            <a href="{% url 'admin:index' %}" class="btn btn-warning">Admin</a>
+          {% endif %}
+        {% else %}
+        <a href="{% url 'sign_in' %}" class="btn me-2">Login</a>
+        <a href="{% url 'sign_up' %}" class="btn btn-warning">Sign-up</a>
+        {% endif %}
       </div>
+      
+
+  
+    
     </div>
   </div>
 </header>

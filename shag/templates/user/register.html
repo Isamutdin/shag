@@ -1,0 +1,21 @@
+{% extends '../common/_base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- {% for f in form %}
+                {{ f.label }}
+                {{ f }}
+                <p></p>
+                {% endfor %} -->
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">Регистрация</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

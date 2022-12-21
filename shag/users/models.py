@@ -1,19 +1,21 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
 from .managers import CustomUserManager
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+# Create your models here.
 
+class CustomUser(AbstractBaseUser, PermissionsMixin):
 
-class CustomUser(AbstractUser):
-    # 'third_name', 'first_name', 'second_name', 'status'
-    username = None
-    first_name = models.CharField(_('Имя'), max_length=30, null=True, blank=True)
+    username = models.CharField(_('username'), max_length=30, unique=True, null=True, blank=True)
+    email = models.EmailField(_('email'), max_length=40, unique=True)
+    phone = models.CharField(_('phone'), max_length=30, unique=True, null=True, blank=True)
+
+    name = models.CharField(_('Имя'), max_length=30, null=True, blank=True)
     second_name = models.CharField(_('Фамилия'), max_length=30, null=True, blank=True)
-    third_name = models.CharField(_('Отчество'), max_length=30, null=True, blank=True)
+    date_create = models.DateTimeField(_('Дата создания'), auto_now_add=True)
+    is_active = models.BooleanField(_('active'), default=True)
+    is_staff = models.BooleanField(_('staff'), default=False)
 
-    email = models.EmailField(_('Адрес электронной почты'), unique=True)
-    school = models.CharField(_('Школа'), max_length=30, null=True, blank=True)
     STATUS_CHOICES = [
     ('TC', 'Учитель'),
     ('ST', 'Ученик'),
@@ -21,17 +23,21 @@ class CustomUser(AbstractUser):
     ('SR', 'Представитель школы'),
     ('R', 'Резерв'),
     ]
+
     status = models.CharField(
         max_length=2,
         choices=STATUS_CHOICES,
-        default='TC',
+        default='ST',
         null=True,
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-    
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
+
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return str(self.email)
+
+    class Meta:
+        unique_together = ('username', 'email', 'phone')
