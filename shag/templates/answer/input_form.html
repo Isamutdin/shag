@@ -1,0 +1,61 @@
+{% extends '../common/_base.html' %}
+
+{% block content %}
+
+
+
+<div class="p-1 row justify-content-lg-center">
+    <div class="col col-md-8">
+
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                {% for answer in answers %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ answer.pk }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapse{{ answer.pk }}" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapse{{ answer.pk }}">
+                            {{ answer }}
+                        </button>
+                    </h2>
+                
+                    <div id="panelsStayOpen-collapse{{ answer.pk }}" class="accordion-collapse collapse"
+                        aria-labelledby="panelsStayOpen-heading{{ answer.pk }}">
+                        <div class="accordion-body" style="word-wrap: break-word;">
+                            <p>{{ answer.right_answer }}</p>
+                            <br>
+                            <div class="d-flex flex-wrap justify-content-lg-start">
+                                <div class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                    <a href="{% url 'input_update' answer.id answer.question_id %}" class="btn btn-primary">Изменить</a>
+                                    <a href="{% url 'input_delete' answer.id answer.question_id %}" class="btn btn-danger">Удалить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-1 row justify-content-lg-center">
+
+    <div class="col-md-8">
+        <div class="h-100 p-5 bg-light border rounded-3" style="word-wrap: break-word;">
+            <form method="POST">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+                <a href="{% url 'question_create' answers.first.question_id %}" class="btn btn-primary" type="submit">Вернутся к тесту</a>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

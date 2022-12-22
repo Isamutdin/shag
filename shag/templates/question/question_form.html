@@ -2,7 +2,7 @@
 {% block content %}
 
 <!-- Test and created questions -->
-<div class="p-5 row justify-content-lg-center">
+<div class="p-1 row justify-content-lg-center">
     <div class="col col-md-7">
 
         <div class="h-100 p-5 bg-light border rounded-3">
@@ -35,8 +35,17 @@
                             <p>{{ element.question.score }}</p>
                             <p>{{ element.question.question_type }}</p>
                             <br>
-                            <a href="{% url 'question_update' element.question.pk test.pk %}" class="btn btn-primary">Изменить</a>
-                            <a href="{% url 'question_delete' element.question.pk test.pk %}" class="btn btn-danger">Удалить</a>
+                            <div class="d-flex flex-wrap justify-content-lg-start">
+                                <div class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                    <a href="{% url 'question_update' element.question.pk test.pk %}"
+                                        class="btn btn-primary">Изменить</a>
+                                    <a href="{% url 'question_delete' element.question.pk test.pk %}"
+                                        class="btn btn-danger">Удалить</a>
+                                </div>
+                                <div class="text-end">
+                                    <a href="{% url 'input_create' element.question.pk %}" class="btn btn-primary text-end">Добавить ответ</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,7 +57,7 @@
 </div>
 
 <!-- Creating Question -->
-<div class="p-5 row justify-content-lg-center">
+<div class="p-1 row justify-content-lg-center">
     <div class="col col-md-7">
 
         <div class="h-100 p-5 bg-light border rounded-3">
