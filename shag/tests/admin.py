@@ -17,6 +17,6 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
 
 admin.site.register(TestQuestions_m2m)
-admin.site.register(TypeAnswer)
+admin.site.register(QuestionType)
 admin.site.register(Test)
 admin.site.register(Question, PostAdmin)

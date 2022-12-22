@@ -9,13 +9,13 @@ class Question(models.Model):
 
     score = models.PositiveSmallIntegerField(default=0)
 
-    answer_type = models.ForeignKey('TypeAnswer', on_delete=models.PROTECT)
+    question_type = models.ForeignKey('QuestionType', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return str(self.note)
 
 
-class TypeAnswer(models.Model):
+class QuestionType(models.Model):
     title = models.CharField(max_length=30)
 
     def __str__(self) -> str:

@@ -1,0 +1,36 @@
+{% extends '../common/_base.html' %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="row align-items-md-stretch">
+
+        {% for test in tests %}
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3" style="word-wrap: break-word;">
+                <h2>{{ test.title }}</h2>
+                <p>{{ test.note|safe }}</p>
+                <p>
+                <h6>{{ test.max_score }} {{ test.complexity }}</h6>
+                </p>
+                <p>
+                <h4>{{ test.author }}</h4> {{ test.create_time }}</p>
+
+
+                <div class="d-flex flex-wrap justify-content-lg-start">
+                    <div class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <a href="#" class="btn btn-primary" type="button">Пройти</a>
+                    </div>
+                    <div class="text-end">
+                        <a href="{% url 'test_update' test.pk %}" class="btn btn-outline-primary"
+                            type="button">Изменить</a>
+                        <a class="btn btn-outline-danger" type="button">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

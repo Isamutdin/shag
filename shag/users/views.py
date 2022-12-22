@@ -11,7 +11,7 @@ class RegisterUser(CreateView):
     form_class = CustomUserCreationsFrom
     
     def get_success_url(self) -> str:
-        return reverse('sign_in')
+        return reverse('login')
 
 
 class LoginUser(LoginView):

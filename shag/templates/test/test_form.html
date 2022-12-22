@@ -10,7 +10,9 @@
                 {% csrf_token %}
                 {{ form.media }}
                 {{ form.as_p }}
-                <input class="btn btn-primary" type="submit"/>
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+                <a href="{% url 'test_list' %}" class="btn btn-primary" type="submit">Назад</a>
+                
             </form>
 
 

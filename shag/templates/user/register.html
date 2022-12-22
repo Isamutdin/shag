@@ -1,19 +1,40 @@
 {% extends '../common/_base.html' %}
 
+
+
 {% block content %}
 <div class="container-fluid text-center mt-5">
     <div class="row justify-content-md-center">
         <div class="col-4">
             <form method="POST">
                 {% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+            
+                <div class="form-floating">
+                    <input type="email" name="email" required="" id="id_username" maxlength="150" class="form-control"
+                        placeholder="Email" aria-label="default input example">
+                    <label for="floatingInput">Email</label>
+                </div>
 
-                <!-- {% for f in form %}
-                {{ f.label }}
-                {{ f }}
+                
                 <p></p>
-                {% endfor %} -->
-                {{ form.as_p }}
-                <button class="btn btn-primary" type="submit">Регистрация</button>
+                <div class="form-floating">
+                    <input type="password" name="password1" required="" class="form-control" id="id_password" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" name="password2" required="" class="form-control" id="id_password" placeholder="Password">
+                    <label for="floatingPassword">Reapet Password</label>
+                </div>
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+                
             </form>
         </div>
     </div>

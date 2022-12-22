@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, TypeAnswer, Test
+from .models import Question, Test, QuestionType
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -7,8 +7,8 @@ from ckeditor.widgets import CKEditorWidget
 class QuestionForm(forms.ModelForm):
     note = forms.CharField(widget=CKEditorWidget())
 
-    answer_type = forms.ModelChoiceField(
-        queryset=TypeAnswer.objects.all(),
+    question_type = forms.ModelChoiceField(
+        queryset=QuestionType.objects.all(),
         empty_label='Тип вопроса',
         widget=forms.Select(attrs={'class': 'form-control'})
     )
@@ -28,4 +28,8 @@ class TestForm(forms.ModelForm):
     class Meta:
         model = Test
         exclude = []
-        fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название теста'}),
+            'max_score': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Баллы'}),
+            'complexity': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Сложность'})
+        }

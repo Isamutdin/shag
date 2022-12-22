@@ -1,7 +1,7 @@
 {% extends '../common/_base.html' %}
 {% block content %}
 
-
+<!-- Test and created questions -->
 <div class="p-5 row justify-content-lg-center">
     <div class="col col-md-7">
 
@@ -16,40 +16,38 @@
             <br>
             <h5>Автор: {{ test.author }}</h5>
             <br>
-            <a class="btn btn-primary">Изменить</a>
+            <a href="{% url 'test_update' test.pk %}" class="btn btn-primary">Изменить</a>
             <p></p>
             <div class="accordion" id="accordionPanelsStayOpenExample">
-                {% for question in questions %}
+                {% for element in m2m %}
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ question.pk }}">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading{{ element.question.pk }}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapse{{ question.pk }}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-collapse{{ question.pk }}">
-                            {{ question.pk }}
+                            data-bs-target="#panelsStayOpen-collapse{{ element.question.pk }}" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapse{{ element.question.pk }}">
+                            {{ element.question.pk }}
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapse{{ question.pk }}" class="accordion-collapse collapse"
-                        aria-labelledby="panelsStayOpen-heading{{ question.pk }}">
+                    <div id="panelsStayOpen-collapse{{ element.question.pk }}" class="accordion-collapse collapse"
+                        aria-labelledby="panelsStayOpen-heading{{ element.question.pk }}">
                         <div class="accordion-body" style="word-wrap: break-word;">
-                            <p>{{ question.note|safe }}</p>
-                            <p>{{ question.score }}</p>
-                            <p>{{ question.answer_type }}</p>
+                            <p>{{ element.question.note|safe }}</p>
+                            <p>{{ element.question.score }}</p>
+                            <p>{{ element.question.question_type }}</p>
                             <br>
-                            <a href="{% url 'question_update' question.pk test.pk %}" class="btn btn-primary">Изменить</a>
-                            <a href="{% url 'question_delete' question.pk test.pk %}" class="btn btn-danger">Удалить</a>
+                            <a href="{% url 'question_update' element.question.pk test.pk %}" class="btn btn-primary">Изменить</a>
+                            <a href="{% url 'question_delete' element.question.pk test.pk %}" class="btn btn-danger">Удалить</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-
-
         </div>
         <br>
     </div>
-
 </div>
 
+<!-- Creating Question -->
 <div class="p-5 row justify-content-lg-center">
     <div class="col col-md-7">
 
@@ -67,7 +65,7 @@
                 {{ form.score }}
                 <br>
                 Тип вопроса
-                {{ form.answer_type }}
+                {{ form.question_type }}
                 <br>
                 <input class="btn btn-primary" type="submit" />
             </form>

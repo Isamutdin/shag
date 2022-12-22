@@ -17,11 +17,8 @@ class QuestionCreateView(CreateView):
         data = super().get_context_data(**kwargs)
         data['test'] = Test.objects.get(pk=self.kwargs['pk'])# через урл передается pk теста
 
-        m2m = TestQuestions_m2m.objects.filter(test_id=self.kwargs['pk']).values_list('question_id')#через таблицу m2m я извлекаю все id вопросов принадлежащие тесту
-        data['questions'] = []
-
-        for el in m2m:
-            data['questions'].append(Question.objects.get(pk=el[0]))#после чего я нахожу по этим id вопросы из модели Question
+        #через таблицу m2m я извлекаю все id вопросов принадлежащие тесту
+        data['m2m'] = TestQuestions_m2m.objects.filter(test_id=self.kwargs['pk'])
 
         return data
 
@@ -47,13 +44,8 @@ class QuestionUpdateView(UpdateView):
     def get_context_data(self, **kwargs):# тоже самое что и create
         data = super().get_context_data(**kwargs)
         data['test'] = Test.objects.get(pk=self.kwargs['id'])
-
-        m2m = TestQuestions_m2m.objects.filter(test_id=self.kwargs['id']).values_list('question_id')
-        data['questions'] = []
-
-        for el in m2m:
-            data['questions'].append(Question.objects.get(pk=el[0]))
-
+       
+        data['m2m'] = TestQuestions_m2m.objects.filter(test_id=self.kwargs['id'])
         return data
 
     def get_success_url(self) -> str:#pk вопроса, а id теста
@@ -87,4 +79,17 @@ class TestCreateView(CreateView):
         return redirect(self.get_success_url(test.pk))
 
 
-        
+class TestUpdateView(UpdateView):
+    model = Test
+    template_name = 'test/test_form.html'
+    form_class = TestForm
+
+    def get_success_url(self) -> str:
+        return reverse("question_create", args=[self.kwargs['pk']])
+
+
+class TestListView(ListView):
+    model = Test
+    context_object_name = "tests"
+    template_name = 'test/lists.html'
+

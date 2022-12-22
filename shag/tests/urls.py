@@ -9,4 +9,6 @@ urlpatterns = [
     path('question_delete/<int:pk>/<int:id>/', QuestionDeleteView.as_view(), name='question_delete'),#pk вопроса, а id теста
 
     path('test_create/', TestCreateView.as_view(), name='test_create'),
+    path('test_update/<int:pk>/', TestUpdateView.as_view(), name='test_update'),
+    path('test_list/', TestListView.as_view(), name='test_list'),
 ]
