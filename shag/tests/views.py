@@ -88,7 +88,7 @@ class TestUpdateView(UpdateView):
         return reverse("question_create", args=[self.kwargs['pk']])
 
 
-class TestListView(ListView):
+class TestListView(ListView):#list view
     model = Test
     context_object_name = "tests"
     template_name = 'test/lists.html'
